@@ -17,9 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Active nav link ── */
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  const isRoot = segments.length <= 1 || segments[segments.length - 1].replace('.html', '') === 'index';
+  const currentBase = isRoot ? '' : segments[segments.length - 1].replace(/\.html$/, '');
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
-    if (link.getAttribute('href') === path) link.classList.add('active');
+    const href = link.getAttribute('href');
+    const page = href.replace(/^(\.\.\/)?/, '').replace(/\/$/, '').replace(/\.html$/, '').replace(/^\.$/, '');
+    const linkIsHome = !page;
+    if ((linkIsHome && isRoot) || (!linkIsHome && page === currentBase)) {
+      link.classList.add('active');
+    }
   });
 
   /* ── Hero parallax ── */
