@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap');
 
 :root {
-  --bg: #0a0a0a;
-  --bg-card: #131313;
-  --bg-overlay: rgba(8,8,8,0.94);
-  --red: #c81818;
-  --red-hover: #e01e1e;
-  --gold: #c8920c;
-  --gold-light: #e8aa12;
-  --cream: #f0ebe0;
-  --muted: #707070;
-  --border: #222;
-  --border-light: #2e2e2e;
+  --bg: #f4f4f4;
+  --bg-card: #ffffff;
+  --bg-overlay: rgba(244,244,244,0.96);
+  --red: #e8192c;
+  --red-hover: #c5101f;
+  --gold: #f5a100;
+  --gold-light: #ffbe40;
+  --cream: #1a1a1a;
+  --muted: #888888;
+  --border: #e0e0e0;
+  --border-light: #d0d0d0;
 }
 
 *, *::before, *::after {
@@ -52,7 +52,7 @@ body::before {
 }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-track { background: #e8e8e8; }
 ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
 
 /* ===================== NAVIGATION ===================== */
@@ -219,7 +219,7 @@ nav {
   background-image: url('Supercars/Wallpaper.jpg');
   background-size: cover;
   background-position: center 30%;
-  filter: brightness(0.38) saturate(0.75);
+  filter: brightness(0.48) saturate(0.85);
   transform: scale(1.05);
   transition: transform 8s ease;
 }
@@ -578,7 +578,7 @@ nav {
   position: absolute;
   font-family: 'Bebas Neue', cursive;
   font-size: clamp(5rem, 22vw, 17rem);
-  color: rgba(255,255,255,0.025);
+  color: rgba(0,0,0,0.06);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -40%);
@@ -647,7 +647,7 @@ nav {
 
 .video-card:hover {
   border-color: var(--red);
-  box-shadow: 0 8px 30px rgba(200,24,24,0.12);
+  box-shadow: 0 8px 30px rgba(232,25,44,0.18);
   transform: translateY(-3px);
 }
 
@@ -710,7 +710,7 @@ nav {
   position: absolute;
   font-family: 'Bebas Neue', cursive;
   font-size: clamp(3rem, 14vw, 11rem);
-  color: rgba(255,255,255,0.025);
+  color: rgba(0,0,0,0.05);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -837,8 +837,9 @@ nav {
   align-items: center;
   gap: 0.85rem;
   margin-bottom: 3rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   padding: 1.75rem 2rem;
 }
 
@@ -871,9 +872,13 @@ nav {
 
 /* ===================== FOOTER ===================== */
 footer {
-  border-top: 1px solid var(--border);
+  background: #1a1a1a;
+  border-top: 3px solid var(--red);
   padding: 2rem;
 }
+
+.footer-logo { color: #f4f4f4; }
+.footer-copy { color: #888888; }
 
 .footer-inner {
   max-width: 1400px;
