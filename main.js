@@ -49,52 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.appendChild(btn);
   });
 
-  // Lazy-load + muted looping preview via IntersectionObserver
-  const gridVideos = document.querySelectorAll('.video-wrapper video[data-src]');
-
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const video = entry.target;
-        if (entry.isIntersecting) {
-          if (video.dataset.src) {
-            video.src = video.dataset.src;
-            video.removeAttribute('data-src');
-          }
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    }, { threshold: 0.2 });
-
-    gridVideos.forEach(v => observer.observe(v));
-  } else {
-    gridVideos.forEach(v => {
-      if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute('data-src'); }
-    });
-  }
-
   /* ── Modal lightbox ── */
   const modal    = document.getElementById('videoModal');
   const modalVid = document.getElementById('modalVideo');
   const closeBtn = document.getElementById('modalClose');
   if (!modal || !modalVid) return;
 
-  let currentGridVideo = null;
-
-  function openModal(src, gridVideo) {
-    currentGridVideo = gridVideo;
-    if (gridVideo) gridVideo.pause();
-
+  function openModal(src) {
     modalVid.src = src;
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-
-    // Small delay to let src settle before playing
-    setTimeout(() => {
-      modalVid.play().catch(() => {});
-    }, 80);
+    setTimeout(() => modalVid.play().catch(() => {}), 80);
   }
 
   function closeModal() {
@@ -103,21 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
     modalVid.load();
     modal.classList.remove('open');
     document.body.style.overflow = '';
-
-    // Resume grid preview for the card we came from
-    if (currentGridVideo) {
-      currentGridVideo.play().catch(() => {});
-      currentGridVideo = null;
-    }
   }
 
-  // Tap any video card to open modal
+  // Tap any video card → open modal
   document.querySelectorAll('.video-card').forEach(card => {
     card.style.cursor = 'pointer';
     card.addEventListener('click', () => {
       const video = card.querySelector('video');
-      const src = video.src || video.dataset.src;
-      if (src) openModal(src, video);
+      const src = video.dataset.src || video.getAttribute('src');
+      if (src) openModal(src);
     });
   });
 
