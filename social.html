@@ -68,7 +68,7 @@
     <div class=”qr-section”>
       <p class=”qr-label”>Scan to visit the site</p>
       <div class=”qr-frame”>
-        <div id=”qr-code”></div>
+        <canvas id=”qr-canvas”></canvas>
       </div>
       <p class=”qr-url”>mahikhan1223.github.io/spotbymahi</p>
     </div>
@@ -95,15 +95,15 @@
   </footer>
 
   <script src="main.js?v=5"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <script>
-    new QRCode(document.getElementById('qr-code'), {
-      text: 'https://mahikhan1223.github.io/spotbymahi/',
-      width: 180,
-      height: 180,
-      colorDark: '#0a0a0a',
-      colorLight: '#f0ebe0',
-      correctLevel: QRCode.CorrectLevel.H
+    new QRious({
+      element: document.getElementById('qr-canvas'),
+      value: 'https://mahikhan1223.github.io/spotbymahi/',
+      size: 180,
+      foreground: '#0a0a0a',
+      background: '#f0ebe0',
+      level: 'H'
     });
   </script>
 </body>
