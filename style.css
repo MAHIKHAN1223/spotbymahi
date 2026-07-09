@@ -694,14 +694,12 @@ nav {
 
 /* ===================== SOCIAL PAGE ===================== */
 .social-hero {
-  min-height: calc(100vh - 64px);
-  min-height: calc(100dvh - 64px - env(safe-area-inset-top, 0px));
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 8rem 2rem 5rem;
+  padding: 7rem 2rem 5rem;
   position: relative;
 }
 
