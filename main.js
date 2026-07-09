@@ -31,5 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  /* ── Video thumbnails — seek to first frame after metadata loads ── */
+  document.querySelectorAll('.video-wrapper video').forEach(video => {
+    video.addEventListener('loadedmetadata', () => {
+      video.currentTime = 0.5;
+    });
+  });
 
 });
