@@ -53,7 +53,7 @@
 
       <div class="video-card">
         <div class="video-wrapper">
-          <video data-src="Takeover/IMG_2173.MOV" muted autoplay loop playsinline preload="none" controls></video>
+          <video data-src="Takeover/IMG_2173.MOV" muted autoplay loop playsinline preload="none"></video>
         </div>
         <div class="video-footer">
           <span class="video-num">CLIP 001</span>
@@ -63,7 +63,7 @@
 
       <div class="video-card">
         <div class="video-wrapper">
-          <video data-src="Takeover/IMG_2228.MOV" muted autoplay loop playsinline preload="none" controls></video>
+          <video data-src="Takeover/IMG_2228.MOV" muted autoplay loop playsinline preload="none"></video>
         </div>
         <div class="video-footer">
           <span class="video-num">CLIP 002</span>
@@ -73,7 +73,7 @@
 
       <div class="video-card">
         <div class="video-wrapper">
-          <video data-src="Takeover/IMG_4490.MOV" muted autoplay loop playsinline preload="none" controls></video>
+          <video data-src="Takeover/IMG_4490.MOV" muted autoplay loop playsinline preload="none"></video>
         </div>
         <div class="video-footer">
           <span class="video-num">CLIP 003</span>
@@ -83,7 +83,7 @@
 
       <div class="video-card">
         <div class="video-wrapper">
-          <video data-src="Takeover/IMG_4512.MOV" muted autoplay loop playsinline preload="none" controls></video>
+          <video data-src="Takeover/IMG_4512.MOV" muted autoplay loop playsinline preload="none"></video>
         </div>
         <div class="video-footer">
           <span class="video-num">CLIP 004</span>
@@ -106,6 +106,18 @@
       </div>
     </div>
   </footer>
+
+  <!-- Video Modal -->
+  <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="modal-topbar">
+      <span class="modal-label">SpotbyMahi</span>
+      <button class="modal-close" id="modalClose" aria-label="Close video">&#x2715;</button>
+    </div>
+    <div class="modal-video-wrap">
+      <video id="modalVideo" controls playsinline></video>
+    </div>
+    <p class="modal-hint">Tap outside or swipe down to close</p>
+  </div>
 
   <script src="main.js"></script>
 </body>

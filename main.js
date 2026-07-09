@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Mobile menu toggle
+  /* ── Mobile nav ── */
   const hamburger = document.querySelector('.hamburger');
   const mobileMenu = document.querySelector('.mobile-menu');
-
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
@@ -17,13 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Active nav link
+  /* ── Active nav link ── */
   const path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
     if (link.getAttribute('href') === path) link.classList.add('active');
   });
 
-  // Hero parallax
+  /* ── Hero parallax ── */
   const heroBg = document.querySelector('.hero-bg');
   if (heroBg) {
     heroBg.classList.add('loaded');
@@ -32,39 +31,110 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // Lazy-load + autoplay portrait videos when in viewport, pause when out
-  const videos = document.querySelectorAll('.video-wrapper video[data-src]');
+  /* ── Video grid ── */
+  const videoWrappers = document.querySelectorAll('.video-wrapper');
+  if (!videoWrappers.length) return;
 
-  if (!videos.length) return;
+  // Inject play-button overlay on every card
+  videoWrappers.forEach(wrapper => {
+    const btn = document.createElement('div');
+    btn.className = 'play-overlay';
+    btn.innerHTML = `
+      <div class="play-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="11" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="white"/>
+        </svg>
+      </div>`;
+    wrapper.appendChild(btn);
+  });
+
+  // Lazy-load + muted looping preview via IntersectionObserver
+  const gridVideos = document.querySelectorAll('.video-wrapper video[data-src]');
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const video = entry.target;
-
         if (entry.isIntersecting) {
-          // Load source on first sight
           if (video.dataset.src) {
             video.src = video.dataset.src;
             video.removeAttribute('data-src');
           }
-          // Attempt autoplay (muted is set in HTML so browsers allow it)
           video.play().catch(() => {});
         } else {
           video.pause();
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.2 });
 
-    videos.forEach(v => observer.observe(v));
+    gridVideos.forEach(v => observer.observe(v));
   } else {
-    // Fallback for older browsers
-    videos.forEach(v => {
-      if (v.dataset.src) {
-        v.src = v.dataset.src;
-        v.removeAttribute('data-src');
-      }
+    gridVideos.forEach(v => {
+      if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute('data-src'); }
     });
   }
+
+  /* ── Modal lightbox ── */
+  const modal    = document.getElementById('videoModal');
+  const modalVid = document.getElementById('modalVideo');
+  const closeBtn = document.getElementById('modalClose');
+  if (!modal || !modalVid) return;
+
+  let currentGridVideo = null;
+
+  function openModal(src, gridVideo) {
+    currentGridVideo = gridVideo;
+    if (gridVideo) gridVideo.pause();
+
+    modalVid.src = src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Small delay to let src settle before playing
+    setTimeout(() => {
+      modalVid.play().catch(() => {});
+    }, 80);
+  }
+
+  function closeModal() {
+    modalVid.pause();
+    modalVid.removeAttribute('src');
+    modalVid.load();
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+
+    // Resume grid preview for the card we came from
+    if (currentGridVideo) {
+      currentGridVideo.play().catch(() => {});
+      currentGridVideo = null;
+    }
+  }
+
+  // Tap any video card to open modal
+  document.querySelectorAll('.video-card').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      const video = card.querySelector('video');
+      const src = video.src || video.dataset.src;
+      if (src) openModal(src, video);
+    });
+  });
+
+  // Close button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Tap backdrop to close
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  // Escape key
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Swipe down to close (mobile)
+  let touchStartY = 0;
+  modalVid.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  modalVid.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - touchStartY > 80) closeModal();
+  }, { passive: true });
 
 });
