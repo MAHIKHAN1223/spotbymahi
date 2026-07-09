@@ -669,6 +669,17 @@ nav {
   object-fit: contain;
 }
 
+/* Transparent overlay that captures the first tap and loads the video */
+.video-tap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+  background: transparent;
+}
+
+/* Once tapped, overlay is removed so native controls are fully accessible */
+
 .video-footer {
   padding: 0.65rem 0.9rem;
   display: flex;

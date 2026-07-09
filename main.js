@@ -31,4 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  /* ── Tap-to-load videos ── */
+  // Each video has data-src but NO src — completely frozen.
+  // A transparent overlay sits on top and catches the first tap.
+  // On tap: set src, remove overlay, play. Native controls take over from there.
+  document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+    const video = wrapper.querySelector('video');
+    if (!video || !video.dataset.src) return;
+
+    const tap = document.createElement('div');
+    tap.className = 'video-tap';
+    wrapper.appendChild(tap);
+
+    tap.addEventListener('click', () => {
+      video.src = video.dataset.src;
+      video.removeAttribute('data-src');
+      tap.remove();          // native controls now fully accessible
+      video.play().catch(() => {});
+    });
+  });
+
 });
