@@ -797,6 +797,13 @@ nav {
 
 .sc-dot { color: var(--red); }
 
+.sc-btn-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .sc-follow-btn {
   display: inline-flex;
   align-items: center;
@@ -809,7 +816,7 @@ nav {
   text-decoration: none;
   color: #ffffff;
   background: var(--red);
-  padding: 1rem 2.75rem;
+  padding: 1rem 2.25rem;
   border: 2px solid var(--red);
   transition: background 0.25s, color 0.25s;
 }
@@ -817,6 +824,18 @@ nav {
 .sc-follow-btn:hover {
   background: transparent;
   color: var(--red);
+}
+
+.sc-follow-btn--tt {
+  background: transparent;
+  border-color: rgba(255,255,255,0.25);
+  color: #ffffff;
+}
+
+.sc-follow-btn--tt:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #111111;
 }
 
 .sc-scroll-hint {
