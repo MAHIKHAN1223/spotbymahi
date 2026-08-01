@@ -692,6 +692,20 @@ nav {
   opacity: 0.6;
 }
 
+/* ===================== RARE COLLAGES ===================== */
+.collage-section { padding: 2rem 2rem 4rem; max-width: 1400px; margin: 0 auto; }
+.collage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; }
+.collage { background: var(--bg-card); border: 1px solid var(--border); overflow: hidden; }
+.collage-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); background: var(--bg); }
+.collage-num { font-family: 'Bebas Neue', cursive; font-size: 1.1rem; color: var(--red); letter-spacing: 0.05em; }
+.collage-range { font-family: 'Oswald', sans-serif; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
+.collage-videos { display: grid; gap: 3px; background: var(--border); }
+.collage-2, .collage-4, .collage-5, .collage-7 { grid-template-columns: 1fr 1fr; }
+.collage-item { position: relative; background: #000; height: 220px; overflow: hidden; }
+.collage-item video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.collage-item-num { position: absolute; bottom: 0.4rem; left: 0.4rem; font-family: 'Oswald', sans-serif; font-size: 0.55rem; letter-spacing: 2px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.5); padding: 0.15rem 0.35rem; }
+.collage-item--span { grid-column: span 2; }
+
 /* ===================== SOCIAL PAGE ===================== */
 
 .sc-hero {
@@ -1070,6 +1084,9 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 0.5rem;
   }
+
+  .collage-grid { grid-template-columns: 1fr; }
+  .collage-item { height: 180px; }
 
   .sc-pillars-grid { grid-template-columns: 1fr; }
   .sc-pillar:hover { transform: none; }
