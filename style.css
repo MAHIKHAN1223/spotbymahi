@@ -694,8 +694,8 @@ nav {
 
 /* ===================== RARE COLLAGES ===================== */
 .collage-section { padding: 2rem 2rem 4rem; max-width: 1400px; margin: 0 auto; }
-.collage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; align-items: start; }
-.collage { background: var(--bg-card); border: 1px solid var(--border); overflow: hidden; }
+.collage-grid { columns: 2; column-gap: 2rem; margin-top: 2rem; }
+.collage { background: var(--bg-card); border: 1px solid var(--border); overflow: hidden; break-inside: avoid; margin-bottom: 2rem; }
 .collage-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); background: var(--bg); }
 .collage-num { font-family: 'Bebas Neue', cursive; font-size: 1.1rem; color: var(--red); letter-spacing: 0.05em; }
 .collage-range { font-family: 'Oswald', sans-serif; font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
@@ -1087,7 +1087,7 @@ footer {
     gap: 0.5rem;
   }
 
-  .collage-grid { grid-template-columns: 1fr; }
+  .collage-grid { columns: 1; }
   .collage-item { height: 180px; }
 
   .sc-pillars-grid { grid-template-columns: 1fr; }
