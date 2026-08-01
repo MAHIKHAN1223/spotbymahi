@@ -705,6 +705,8 @@ nav {
 .collage-item video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .collage-item-num { position: absolute; bottom: 0.4rem; left: 0.4rem; font-family: 'Oswald', sans-serif; font-size: 0.55rem; letter-spacing: 2px; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.5); padding: 0.15rem 0.35rem; }
 .collage-item--span { grid-column: span 2; }
+.collage-empty { display: flex; align-items: center; justify-content: center; height: 160px; background: var(--bg); }
+.collage-empty-label { font-family: 'Oswald', sans-serif; font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); }
 
 /* ===================== SOCIAL PAGE ===================== */
 
